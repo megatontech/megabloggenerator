@@ -111,6 +111,6 @@ C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\zh-Hans\System.Web.Raz
 C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\zh-Hans\System.Web.WebPages.resources.dll
 C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.csprojResolveAssemblyReference.cache
 C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.dll
 C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.pdb
+C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.csprojResolveAssemblyReference.cache
