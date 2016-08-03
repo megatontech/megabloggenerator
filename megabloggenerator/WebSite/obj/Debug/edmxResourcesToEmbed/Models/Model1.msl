@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MegaGenerateModelStoreContainer" CdmEntityContainer="MegaGenerateEntities">
+    <EntitySetMapping Name="POST">
+      <EntityTypeMapping TypeName="MegaGenerateModel.POST">
+        <MappingFragment StoreEntitySet="POST">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="TitleDisp" ColumnName="TitleDisp" />
+          <ScalarProperty Name="TitleImg" ColumnName="TitleImg" />
+          <ScalarProperty Name="TitleImgDisp" ColumnName="TitleImgDisp" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Tag" ColumnName="Tag" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="LastEdit" ColumnName="LastEdit" />
+          <ScalarProperty Name="LastEditDate" ColumnName="LastEditDate" />
+          <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+          <ScalarProperty Name="HasMusic" ColumnName="HasMusic" />
+          <ScalarProperty Name="MusicList" ColumnName="MusicList" />
+          <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+          <ScalarProperty Name="ExtScript" ColumnName="ExtScript" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Templete">
+      <EntityTypeMapping TypeName="MegaGenerateModel.Templete">
+        <MappingFragment StoreEntitySet="Templete">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TempleteName" ColumnName="TempleteName" />
+          <ScalarProperty Name="TempleteContent" ColumnName="TempleteContent" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

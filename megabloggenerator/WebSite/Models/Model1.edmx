@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MegaGenerateModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Github\megabloggenerator\megabloggenerator\WebSite\DB\MegaGenerate.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="POST">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TitleDisp" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TitleImg" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TitleImgDisp" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="CreateDate" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Content" Type="blob" />
+          <Property Name="LastEdit" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="LastEditDate" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="DeleteFlag" Type="integer" />
+          <Property Name="HasMusic" Type="integer" />
+          <Property Name="MusicList" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="IsPublish" Type="integer" Nullable="false" />
+          <Property Name="ExtScript" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="Templete">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TempleteName" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TempleteContent" Type="blob" />
+          <Property Name="CreateDate" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="UpdateDate" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityContainer Name="MegaGenerateModelStoreContainer">
+          <EntitySet Name="POST" EntityType="Self.POST" store:Type="Tables" />
+          <EntitySet Name="Templete" EntityType="Self.Templete" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MegaGenerateModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="POST">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TitleDisp" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TitleImg" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TitleImgDisp" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Tag" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="LastEdit" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="LastEditDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DeleteFlag" Type="Int64" />
+          <Property Name="HasMusic" Type="Int64" />
+          <Property Name="MusicList" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="IsPublish" Type="Int64" Nullable="false" />
+          <Property Name="ExtScript" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Templete">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TempleteName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TempleteContent" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="CreateDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="MegaGenerateEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="POST" EntityType="Self.POST" />
+          <EntitySet Name="Templete" EntityType="Self.Templete" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MegaGenerateModelStoreContainer" CdmEntityContainer="MegaGenerateEntities">
+          <EntitySetMapping Name="POST">
+            <EntityTypeMapping TypeName="MegaGenerateModel.POST">
+              <MappingFragment StoreEntitySet="POST">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TitleDisp" ColumnName="TitleDisp" />
+                <ScalarProperty Name="TitleImg" ColumnName="TitleImg" />
+                <ScalarProperty Name="TitleImgDisp" ColumnName="TitleImgDisp" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="LastEdit" ColumnName="LastEdit" />
+                <ScalarProperty Name="LastEditDate" ColumnName="LastEditDate" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+                <ScalarProperty Name="HasMusic" ColumnName="HasMusic" />
+                <ScalarProperty Name="MusicList" ColumnName="MusicList" />
+                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+                <ScalarProperty Name="ExtScript" ColumnName="ExtScript" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templete">
+            <EntityTypeMapping TypeName="MegaGenerateModel.Templete">
+              <MappingFragment StoreEntitySet="Templete">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TempleteName" ColumnName="TempleteName" />
+                <ScalarProperty Name="TempleteContent" ColumnName="TempleteContent" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

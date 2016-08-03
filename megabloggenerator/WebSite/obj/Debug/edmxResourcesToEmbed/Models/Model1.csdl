@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MegaGenerateModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="POST">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TitleDisp" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TitleImg" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TitleImgDisp" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Tag" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+    <Property Name="LastEdit" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="LastEditDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteFlag" Type="Int64" />
+    <Property Name="HasMusic" Type="Int64" />
+    <Property Name="MusicList" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="IsPublish" Type="Int64" Nullable="false" />
+    <Property Name="ExtScript" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Templete">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TempleteName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TempleteContent" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+    <Property Name="CreateDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="MegaGenerateEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="POST" EntityType="Self.POST" />
+    <EntitySet Name="Templete" EntityType="Self.Templete" />
+  </EntityContainer>
+</Schema>
