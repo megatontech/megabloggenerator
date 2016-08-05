@@ -294,6 +294,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\banner.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -466,7 +467,7 @@
     <Content Include="Views\Post\Index.cshtml" />
     <Content Include="Views\Post\List.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
-    <Content Include="Views\Post\Detail.cshtml" />
+    <Content Include="Views\Post\Details.cshtml" />
     <Content Include="Views\Post\Create.cshtml" />
     <Content Include="Views\Templete\List.cshtml" />
     <Content Include="Views\Templete\Details.cshtml" />
