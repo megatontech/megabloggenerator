@@ -255,8 +255,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\GenerateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\PreviewController.cs" />
+    <Compile Include="Controllers\TempleteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -466,14 +469,21 @@
     <Content Include="Views\Post\Detail.cshtml" />
     <Content Include="Views\Post\Create.cshtml" />
     <Content Include="Views\Templete\List.cshtml" />
-    <Content Include="Views\Templete\Detail.cshtml" />
-    <Content Include="Views\Templete\Add.cshtml" />
+    <Content Include="Views\Templete\Details.cshtml" />
+    <Content Include="Views\Templete\Create.cshtml" />
     <Content Include="Views\Templete\Edit.cshtml" />
+    <Content Include="Views\Preview\Create.cshtml" />
+    <Content Include="Views\Preview\Details.cshtml" />
+    <Content Include="Views\Preview\Edit.cshtml" />
+    <Content Include="Views\Preview\List.cshtml" />
+    <Content Include="Views\Generate\List.cshtml" />
+    <Content Include="Views\Generate\Create.cshtml" />
+    <Content Include="Views\Generate\Details.cshtml" />
+    <Content Include="Views\Generate\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helper\" />
-    <Folder Include="Views\Generate\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "96ebfa9ebcfe695ae373978fd5d3553da9b3dec8"
+    "signature": "d1ccfff68945a1219ee4df58e72fe0b77e6c4019"
   },
   "compilationOptions": {
     "defines": [
@@ -22,12 +22,21 @@
           "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.AspNetCore.Owin": "1.0.0",
-          "Nancy": "2.0.0-barneyrubble"
+          "Nancy": "2.0.0-barneyrubble",
+          "bootstrap": "3.3.7",
+          "SQLite": "3.12.2",
+          "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
           "megabloggenerator.dll": {}
         }
       },
+      "bootstrap/3.3.7": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "jQuery/1.9.1": {},
       "Libuv/1.9.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1"
@@ -788,6 +797,12 @@
           "Microsoft.NETCore.Targets": "1.0.1"
         }
       },
+      "SQLite/3.12.2": {
+        "dependencies": {
+          "SQLite.Native": "3.12.2"
+        }
+      },
+      "SQLite.Native/3.12.2": {},
       "System.AppContext/4.1.0": {
         "dependencies": {
           "System.Runtime": "4.1.0"
@@ -2162,12 +2177,21 @@
           "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.AspNetCore.Owin": "1.0.0",
-          "Nancy": "2.0.0-barneyrubble"
+          "Nancy": "2.0.0-barneyrubble",
+          "bootstrap": "3.3.7",
+          "SQLite": "3.12.2",
+          "Newtonsoft.Json": "9.0.1"
         },
         "runtime": {
           "megabloggenerator.dll": {}
         }
       },
+      "bootstrap/3.3.7": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "jQuery/1.9.1": {},
       "Libuv/1.9.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1"
@@ -2922,6 +2946,12 @@
           "Microsoft.NETCore.Targets": "1.0.1"
         }
       },
+      "SQLite/3.12.2": {
+        "dependencies": {
+          "SQLite.Native": "3.12.2"
+        }
+      },
+      "SQLite.Native/3.12.2": {},
       "System.AppContext/4.1.0": {
         "dependencies": {
           "System.Runtime": "4.1.0"
@@ -4168,6 +4198,16 @@
       "serviceable": false,
       "sha512": ""
     },
+    "bootstrap/3.3.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3YTWhPNh6UcnUvzw9u6A2/hy2w0h4lznxPbX6FY47lFia3+Ib4zBixTpW6YieYA/b2fLXbkjoD59OjcVF3cJXw=="
+    },
+    "jQuery/1.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HiX9icLyiJGgiL5EOIn0d1MBPHVV2M9mzWT4mANdniDNR51RvAFTyKEXEd2+5yQJ4PJ5xePOR61Vjj/omQzYcw=="
+    },
     "Libuv/1.9.0": {
       "type": "package",
       "serviceable": true,
@@ -4457,6 +4497,16 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-2CQK0jmO6Eu7ZeMgD+LOFbNJSXHFVQbCJJkEyEwowh1SCgYnrn9W9RykMfpeeVGw7h4IBvYikzpGUlmZTUafJw=="
+    },
+    "SQLite/3.12.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XYNQJt2eFqGluWP+fDaiNrV1v3kA+VsU2ygUjLx7zqzhIZKlAjSYMZLldmbGNnlNC5rKR+0LTrN0IA9dZkDyFw=="
+    },
+    "SQLite.Native/3.12.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/5BdEFTaCziE6K5OG0bjSUhPo+LRmFcmyriFWEZNSuHaiqSp69sVngTb/Yo8mH6JykMA79BFdCBLMW+2E3pnuA=="
     },
     "System.AppContext/4.1.0": {
       "type": "package",
