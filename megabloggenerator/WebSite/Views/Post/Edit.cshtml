@@ -1,11 +1,100 @@
 ﻿@model WebSite.Models.POST
 
-@{
-    ViewBag.Title = "Index";
-}
-
-
-
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-xs-12  span12">
+            <img alt="this is Banner" id="banner" src="../../img/banner.png" />
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-xs-6 span6">
+            <div class="row-fluid">
+                <div class="col-xs-12  span12">
+                    <h3>
+                        MarkDown
+                    </h3>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">资料</a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#">信息</a>
+                        </li>
+                        <li class="dropdown pull-right">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">下拉<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">操作</a>
+                                </li>
+                                <li>
+                                    <a href="#">设置栏目</a>
+                                </li>
+                                <li>
+                                    <a href="#">更多设置</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">分割线</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="col-xs-12  span12">
+                    <form class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label" for="inputEmail">邮箱</label>
+                            <div class="controls">
+                                <input id="inputEmail" type="text" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">密码</label>
+                            <div class="controls">
+                                <input id="inputPassword" type="password" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label class="checkbox"><input type="checkbox" /> Remember me</label> <button type="submit" class="btn">登陆</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 span6">
+            <div class="row-fluid">
+                <div class="col-xs-12  span12">
+                    <h3>
+                        预览
+                    </h3>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="col-xs-12  span12">
+                    <div class="hero-unit">
+                        <h1>
+                            Hello, world!
+                        </h1>
+                        <p>
+                            这是一个可视化布局模板, 你可以点击模板里的文字进行修改, 也可以通过点击弹出的编辑框进行富文本修改. 拖动区块能实现排序.
+                        </p>
+                        <p>
+                            <a class="btn btn-primary btn-large" href="#">参看更多 »</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
