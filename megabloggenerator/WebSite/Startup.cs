@@ -12,7 +12,6 @@ namespace WebSite
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
         }
     }
 }

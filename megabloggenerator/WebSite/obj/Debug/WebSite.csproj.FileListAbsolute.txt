@@ -1,4 +1,3 @@
-C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\ApplicationInsights.config
 C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\roslyn\csc.exe
 C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -113,4 +112,3 @@ C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\zh-Hans\System.Web.Web
 C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.dll
 C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.pdb
-C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.csprojResolveAssemblyReference.cache
