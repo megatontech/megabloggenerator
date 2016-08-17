@@ -1,139 +1,86 @@
-﻿
-
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="col-xs-12  span12">
-            <div class="row-fluid">
-                <div class="col-xs-8 span8">
-                </div>
-                <div class="col-xs-4 span4">
-                    <h3>
-                        标题栏
-                    </h3>
-                </div>
-            </div>
-        </div>
+﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Scripts/bootstraptable/dist/bootstrap-table.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstraptable/dist/bootstrap-table.min.js"></script>
+<div class="container">
+    <div id="toolbar">
+        <button id="add" class="btn btn-danger" disabled>
+            <i class="glyphicon glyphicon-add"></i> add
+        </button>
     </div>
-    <div class="row-fluid">
-        <div class="col-xs-12  span12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            编号
-                        </th>
-                        <th>
-                            产品
-                        </th>
-                        <th>
-                            交付时间
-                        </th>
-                        <th>
-                            状态
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            01/04/2012
-                        </td>
-                        <td>
-                            Default
-                        </td>
-                    </tr>
-                    <tr class="success">
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            01/04/2012
-                        </td>
-                        <td>
-                            Approved
-                        </td>
-                    </tr>
-                    <tr class="error">
-                        <td>
-                            2
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            02/04/2012
-                        </td>
-                        <td>
-                            Declined
-                        </td>
-                    </tr>
-                    <tr class="warning">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            03/04/2012
-                        </td>
-                        <td>
-                            Pending
-                        </td>
-                    </tr>
-                    <tr class="info">
-                        <td>
-                            4
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            04/04/2012
-                        </td>
-                        <td>
-                            Call in to confirm
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="pagination">
-                <ul>
-                    <li>
-                        <a href="#">上一页</a>
-                    </li>
-                    <li>
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">下一页</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <table id="table"
+           data-toggle="table"
+           data-search="true"
+           data-toolbar="#toolbar"
+           data-height="460"
+           data-pagination="true"
+           data-id-field="Id"
+           data-page-list="[10, 25, 50, 100, ALL]"
+           data-show-footer="true"
+           data-side-pagination="client"
+           data-url="ListData">
+        <thead>
+            <tr>
+                <th data-field="TitleImgDisp">TitleImgDisp</th>
+                <th data-field="Id">ID</th>
+                <th data-field="Title">Title</th>
+                <th data-field="TitleDisp">TitleDisp</th>
+                <th data-field="Tag">Tag</th>
+                <th data-field="CreateDate">CreateDate</th>
+                <th data-field="LastEditDate">LastEditDate</th>
+                <th data-field="Operate" data-formatter="operateFormatter">Operate</th>
+            </tr>
+        </thead>
+    </table>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <script>
+        var $table = $('#table');
+        function initTable() {
+            $table.bootstrapTable({
+                height: getHeight(),
+            });
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView', {
+                    height: getHeight()
+                });
+            });
+        }
+
+        function operateFormatter(value, row, index) {
+            return [
+                '<a class="view" href="javascript:void(0)" title="view">',
+                '<i class="glyphicon glyphicon-eye"></i>',
+                '</a>',
+                '<a class="edit" href="javascript:void(0)" title="edit">',
+                '<i class="glyphicon glyphicon-edit"></i>',
+                '</a>  ',
+                '<a class="delete" href="javascript:void(0)" title="delete">',
+                '<i class="glyphicon glyphicon-remove"></i>',
+                '</a>'
+            ].join('');
+        }
+
+        window.operateEvents = {
+            'click .view': function (e, value, row, index) {
+                alert('You click view action, row: ' + JSON.stringify(row));
+            },
+            'click .edit': function (e, value, row, index) {
+                alert('You click like action, row: ' + JSON.stringify(row));
+            },
+            'click .delete': function (e, value, row, index) {
+                alert('You click delete action, row: ' + JSON.stringify(row));
+                $table.bootstrapTable('remove', {
+                    field: 'id',
+                    values: [row.id]
+                });
+            }
+        };
+
+        function getHeight() {
+            return $(window).height() - $('h1').outerHeight(true);
+        }
+
+        $(function () {
+            initTable();
+        });
+
+    </script>

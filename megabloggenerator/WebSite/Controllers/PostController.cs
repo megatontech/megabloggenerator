@@ -174,6 +174,17 @@ namespace WebSite.Controllers
             return View(PostList);
         }
 
+        public ActionResult ListData()
+        {
+            var PostList = new List<POST>();
+            using (var ctx = new WebSite.Models.MegaGenerateEntities())
+            {
+                PostList = ctx.POST.ToList();
+            }
+            PostList.ForEach(x=>x.TitleImgDisp=("<img style=' height: 30px;width: 40px;' src='../postImg/"+x.Id+"/"+x.TitleImgDisp+"' alt='title' />"));
+            return Json(PostList,JsonRequestBehavior.AllowGet);
+        }
+
         #endregion - 方法 -
     }
 }
