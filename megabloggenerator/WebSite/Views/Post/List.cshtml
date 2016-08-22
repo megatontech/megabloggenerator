@@ -3,7 +3,7 @@
 <script src="~/Scripts/bootstraptable/dist/bootstrap-table.min.js"></script>
 <div class="container">
     <div id="toolbar">
-        <button id="add" class="btn btn-danger" disabled>
+        <button id="add" class="btn btn-danger" onclick="window.location = 'create';" >
             <i class="glyphicon glyphicon-add"></i> add
         </button>
     </div>
@@ -27,7 +27,7 @@
                 <th data-field="Tag">Tag</th>
                 <th data-field="CreateDate">CreateDate</th>
                 <th data-field="LastEditDate">LastEditDate</th>
-                <th data-field="Operate" data-formatter="operateFormatter">Operate</th>
+                <th data-field="Operate" data-events="operateEvents" data-formatter="operateFormatter">Operate</th>
             </tr>
         </thead>
     </table>
@@ -61,13 +61,14 @@
 
         window.operateEvents = {
             'click .view': function (e, value, row, index) {
-                alert('You click view action, row: ' + JSON.stringify(row));
+                $.ajax({ type: "GET", url: "delete", data: row.id, datatype: "json", success: function () { alert("del success!"); } });
             },
             'click .edit': function (e, value, row, index) {
-                alert('You click like action, row: ' + JSON.stringify(row));
+                $.ajax({ type: "GET", url: "delete", data: row.id, datatype: "json", success: function () { alert("del success!"); } });
             },
             'click .delete': function (e, value, row, index) {
-                alert('You click delete action, row: ' + JSON.stringify(row));
+                var delid = row.Id;
+                $.ajax({ type: "GET", url: "delete", data: 'id=' + delid, datatype: "json", success: function (msg) { alert("del "+msg+"!"); } });
                 $table.bootstrapTable('remove', {
                     field: 'id',
                     values: [row.id]
