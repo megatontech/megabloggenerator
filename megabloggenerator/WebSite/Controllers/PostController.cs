@@ -65,7 +65,8 @@ namespace WebSite.Controllers
         }
 
         // GET: Post/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public JsonResult Delete(int id)
         {
             using (var ctx = new WebSite.Models.MegaGenerateEntities())
             {
@@ -73,7 +74,7 @@ namespace WebSite.Controllers
                 ctx.POST.Remove(post);
                 ctx.SaveChanges();
             }
-            return View();
+            return Json("ok",JsonRequestBehavior.AllowGet);
         }
 
         // POST: Post/Delete/5
