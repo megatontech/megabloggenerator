@@ -74,21 +74,16 @@ function slideBarFilter() {
     var it = nd.find('.sub-pop').find('.sizer-item');
     it.on('click', function () {
         var o = $(this);
-        console.log(o.html());
         if (o.hasClass('sizer-off')) {
             return;
         }
         var ov = o.attr('data-v');
         var op = o.parents('.sub-pop');
         var ot = op.siblings('.item-cont').find('.item-bd');
-        if (o.html().length > 10) {
-            var tempDispStr = o.html().substring(o.html().length-10, o.html().length);
-            ot.text(tempDispStr);
-        } else { ot.text(o.html()); }
+        //文字过长会无法显示
+        if (o.html().length > 10) {ot.text(o.html().substring(o.html().length-10, o.html().length));} else { ot.text(o.html()); }
         ot.attr('data-v', o.attr('data-v'));
         op.hide();
-
-        //unitFilter();
         pageSelectionChange();
     });
 }
