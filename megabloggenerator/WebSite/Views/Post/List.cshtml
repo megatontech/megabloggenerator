@@ -61,18 +61,22 @@
 
         window.operateEvents = {
             'click .view': function (e, value, row, index) {
-                $.ajax({ type: "GET", url: "delete", data: row.id, datatype: "json", success: function () { alert("del success!"); } });
+                var delid = row.Id;
+                window.location.href = "view?id=" + delid;
             },
             'click .edit': function (e, value, row, index) {
-                $.ajax({ type: "GET", url: "delete", data: row.id, datatype: "json", success: function () { alert("del success!"); } });
+                var delid = row.Id;
+                window.location.href = "edit?id=" + delid;
             },
             'click .delete': function (e, value, row, index) {
                 var delid = row.Id;
-                $.ajax({ type: "GET", url: "delete", data: 'id=' + delid, datatype: "json", success: function (msg) { alert("del "+msg+"!"); } });
-                $table.bootstrapTable('remove', {
-                    field: 'id',
-                    values: [row.id]
-                });
+                if (confirm("goona del this?")) {
+                    $.ajax({ type: "GET", url: "delete", data: 'id=' + delid, datatype: "json", success: function (msg) { alert("del " + msg + "!"); } });
+                    $table.bootstrapTable('remove', {
+                        field: 'id',
+                        values: [row.id]
+                    });
+                }
             }
         };
 
