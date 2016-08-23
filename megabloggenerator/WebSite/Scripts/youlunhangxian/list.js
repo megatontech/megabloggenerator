@@ -74,15 +74,20 @@ function slideBarFilter() {
     var it = nd.find('.sub-pop').find('.sizer-item');
     it.on('click', function () {
         var o = $(this);
+        console.log(o.html());
         if (o.hasClass('sizer-off')) {
             return;
         }
         var ov = o.attr('data-v');
         var op = o.parents('.sub-pop');
         var ot = op.siblings('.item-cont').find('.item-bd');
-        ot.text(ov.split('=')[1].split('_')[0]);
-        ot.attr('data-v', o.attr('data-v'));
 
+        if (o.html().length > 10) {
+            var tempDispStr = o.html().substring(o.html().length-10, o.html().length);
+            ot.text(tempDispStr);
+        } else { ot.text(o.html()); }
+
+        ot.attr('data-v', o.attr('data-v'));
         op.hide();
 
         //unitFilter();
@@ -405,32 +410,26 @@ function generateUrl() {
         if (paramarray[para].lastIndexOf('data-route') != -1) {
             var routeNo = paramarray[para].split('_')[1];
             route = "r" + routeNo;
-            console.log(paramarray[para] + route);
         }
         if (paramarray[para].lastIndexOf('data-port') != -1) {
             var portNo = paramarray[para].split('_')[1];
             port = "c" + portNo;
-            console.log(paramarray[para] + port);
         }
         if (paramarray[para].lastIndexOf('data-company') != -1) {
             var companyNo = paramarray[para].split('_')[1];
             company = "cc" + companyNo;
-            console.log(paramarray[para] + company);
         }
         if (paramarray[para].lastIndexOf('data-brand') != -1) {
             var shipNo = paramarray[para].split('_')[1];
             ship = "cr" + shipNo;
-            console.log(paramarray[para] + ship);
         }
         if (paramarray[para].lastIndexOf('data-date') != -1) {
             var godateNo = paramarray[para].split('_')[1];
             godate = "dd" + godateNo;
-            console.log(paramarray[para] + godate);
         }
         if (paramarray[para].lastIndexOf('data-day') != -1) {
             var dayNo = paramarray[para].split('_')[1];
             day = "x" + dayNo;
-            console.log(paramarray[para] + day);
         }
     }
     //价格升序
@@ -474,7 +473,9 @@ function changeUrl(url) {
     window.location.href = url;
 }
 function pageSelectionChange() {
-    changeUrl(generateUrl());
+    if (window.history.replaceState == undefined) { console.log("not supported!"); changeUrl(generateUrl()); }
+    else { unitFilter(); window.history.replaceState(null, document.title, generateUrl()) }
+    //changeUrl(generateUrl());
 } 
 function dispShip() {
     var name = $("#j_sideSizer .list-item-3 .item-bd.fr").text();
