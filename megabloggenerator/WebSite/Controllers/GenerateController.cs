@@ -64,8 +64,8 @@ namespace WebSite.Controllers
             }
         }
 
-        // GET: Generate/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult Generate(int id)
         {
             return View();
         }
