@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using WebSite.Models;
 
@@ -14,12 +15,7 @@ namespace WebSite.Controllers
         public ActionResult Create()
         {
             Templete templete = new Templete();
-            using (var ctx = new WebSite.Models.MegaGenerateEntities())
-            {
-                ctx.Templete.Add(templete);
-                ctx.SaveChanges();
-            }
-            return View(templete);
+            return View();
         }
 
         // POST: Templete/Create
@@ -28,12 +24,12 @@ namespace WebSite.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 Templete templete = new Templete();
                 using (var ctx = new WebSite.Models.MegaGenerateEntities())
                 {
-                    templete.TempleteName = "";
-                    templete.TempleteContent = null;
+                    templete.DispImg = collection["DispImg"];
+                    templete.TempleteName = collection["TempleteName"];
+                    templete.TempleteContent = Encoding.Unicode.GetBytes(collection["TempleteContent"]);
                     templete.CreateDate = DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString();
                     templete.UpdateDate = DateTime.Now.ToShortDateString() + DateTime.Now.ToShortTimeString();
                     ctx.Templete.Add(templete);
@@ -48,7 +44,8 @@ namespace WebSite.Controllers
         }
 
         // GET: Templete/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public JsonResult Delete(int id)
         {
             using (var ctx = new WebSite.Models.MegaGenerateEntities())
             {
@@ -56,7 +53,7 @@ namespace WebSite.Controllers
                 ctx.Templete.Remove(templete);
                 ctx.SaveChanges();
             }
-            return View();
+            return Json("ok",JsonRequestBehavior.AllowGet);
         }
 
         // POST: Templete/Delete/5
@@ -116,6 +113,9 @@ namespace WebSite.Controllers
                 using (var ctx = new WebSite.Models.MegaGenerateEntities())
                 {
                     templete = ctx.Templete.Find(templete.Id);
+                    templete.DispImg = collection["DispImg"];
+                    templete.TempleteName = collection["TempleteName"];
+                    templete.TempleteContent = Encoding.Unicode.GetBytes(collection["TempleteContent"]);
                     ctx.Entry(templete).State = System.Data.Entity.EntityState.Modified;
                     ctx.SaveChanges();
                 }
@@ -136,14 +136,18 @@ namespace WebSite.Controllers
         // GET: Templete
         public ActionResult List()
         {
+            return View();
+        }
+        // GET: Templete
+        public ActionResult ListData()
+        {
             var TempleteList = new List<Templete>();
             using (var ctx = new WebSite.Models.MegaGenerateEntities())
             {
                 TempleteList = ctx.Templete.ToList();
             }
-            return View(TempleteList);
+            return Json(TempleteList, JsonRequestBehavior.AllowGet);
         }
-
         #endregion
     }
 }

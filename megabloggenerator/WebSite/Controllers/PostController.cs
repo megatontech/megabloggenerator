@@ -167,12 +167,7 @@ namespace WebSite.Controllers
 
         public ActionResult List()
         {
-            var PostList = new List<POST>();
-            using (var ctx = new WebSite.Models.MegaGenerateEntities())
-            {
-                PostList = ctx.POST.ToList();
-            }
-            return View(PostList);
+            return View();
         }
 
         public ActionResult ListData()
