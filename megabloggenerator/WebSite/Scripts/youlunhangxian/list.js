@@ -414,6 +414,7 @@ function generateUrl() {
         }
         if (paramarray[para].lastIndexOf('data-brand') != -1) {
             var shipNo = paramarray[para].split('_')[1];
+            company = "cc" + getCompanyCodeByShip(shipNo);
             ship = "cr" + shipNo;
         }
         if (paramarray[para].lastIndexOf('data-date') != -1) {
@@ -422,6 +423,12 @@ function generateUrl() {
         }
         if (paramarray[para].lastIndexOf('data-day') != -1) {
             var dayNo = paramarray[para].split('_')[1];
+            if (dayNo == '3') { dayNo = "35"; }
+            if (dayNo == '6') { dayNo = "68"; }
+            if (dayNo == '9') { dayNo = "912"; }
+            if (dayNo == '13') { dayNo = "1315"; }
+            if (dayNo == '16') { dayNo = "1618"; }
+            if (dayNo == '19') { dayNo = "19"; }
             day = "x" + dayNo;
         }
     }
@@ -458,11 +465,28 @@ function generateUrl() {
     } else if (sortstr == "data-date-scaleasc") {
         godatedesc = "d1";
     }
-    resultUrl += (route + "-" + port + "-" + company + "-" + ship + "-" + godate + "-" + day + "-" + priceasc + "-" + watchnum + "-" + godateasc + "-" + godatedesc + "-" + discount);
+    //url rule change : r0-c0-cc0-cr0-dd0-x0-o0-b-o0-d0-dis0
+    if (route != "r0") { resultUrl += route + "-"; }
+    if (port != "c0") { resultUrl += port + "-"; }
+    if (company != "cc0") { resultUrl += company + "-"; }
+    if (ship != "cr0") { resultUrl += ship + "-"; }
+    if (godate != "dd0") { resultUrl += godate + "-"; }
+    if (day != "x0") { resultUrl += day + "-"; }
+    if (priceasc != "o0") { resultUrl += priceasc + "-"; }
+    if (watchnum != "b") { resultUrl += watchnum + "-"; }
+    if (godateasc != "o0") { resultUrl += godateasc + "-"; }
+    if (godatedesc != "d0") { resultUrl += godatedesc + "-"; }
+    if (discount != "dis0") { resultUrl += discount + "-"; }
+    //resultUrl += (route + "-" + port + "-" + company + "-" + ship + "-" + godate + "-" + day + "-" + priceasc + "-" + watchnum + "-" + godateasc + "-" + godatedesc + "-" + discount);
+    if (resultUrl.length > 0) { resultUrl = resultUrl.substring(0, resultUrl.length - 1); } 
+    else {resultUrl = "youlunhangxian";}
     console.log(host + resultUrl + ".html");
     return host + resultUrl + ".html";
 }
-
+function getCompanyCodeByShip(ship) {
+    var companyData = $(".youlun-list #j_sideSizer .list-item-3 .sizer-items .si-item .sizer-item[data-v='data-brand=_" + ship + "']").parent().prev().find("span").attr("data-v");
+    return companyData.split('_')[1];
+}
 function changeUrl(url) {
     window.location.href = url;
 }
@@ -473,6 +497,12 @@ function pageSelectionChange() {
         changeUrl(generateUrl());
     }
     else {
+        //change title
+        var port = "";
+        var route = "";
+        var params = getFilteredParams();
+        var paraArray = params.split(','); 
+        if (params.indexOf(",") == -1) { paraArray.push(params); } for (var para in paraArray) { if (paraArray[para].indexOf("route") != -1) { route = paraArray[para].split("=")[1].split("_")[0];  } if (paraArray[para].indexOf("port") != -1) { port = paraArray[para].split("=")[1].split("_")[0];  } } if (port.length > 0 && route.length > 0) { $("title").html(port + "到" + route + "游轮旅游报价_日韩邮轮航线旅游价格_悠哉旅游网"); } else if (port.length > 0 && route.length == 0) { $("title").html(port + "游轮旅游报价_日韩邮轮航线旅游价格_悠哉旅游网"); } else if (port.length == 0 && route.length > 0) { $("title").html(route + "游轮旅游报价_日韩邮轮航线旅游价格_悠哉旅游网"); } else { $("title").html("游轮旅游报价_日韩邮轮航线旅游价格_悠哉旅游网"); }
         unitFilter();
         window.history.replaceState(null, document.title, generateUrl());
     }
