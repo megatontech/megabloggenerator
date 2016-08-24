@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = "List";
 }
-
-<h2>List</h2>
+@using (Html.BeginForm())
+{
+    @Html.TextBox("DispImg")
+    @Html.TextBox("TempleteName")
+    @Html.TextBox("TempleteContent")
+    <input type="submit" name="submit" value="SAVE">
+}  
 
