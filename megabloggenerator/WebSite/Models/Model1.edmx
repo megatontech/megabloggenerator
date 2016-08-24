@@ -4,11 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MegaGenerateModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Github\megabloggenerator\megabloggenerator\WebSite\DB\MegaGenerate.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MegaGenerateModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Github\megabloggenerator\megabloggenerator\WebSite\DB\MegaGenerate.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="POST">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+          <Property Name="TempleteId" Type="integer" />
           <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="TitleDisp" Type="nvarchar" MaxLength="2147483647" />
@@ -29,6 +30,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+          <Property Name="DispImg" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TempleteName" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="TempleteContent" Type="blob" />
@@ -39,15 +41,19 @@
           <EntitySet Name="POST" EntityType="Self.POST" store:Type="Tables" />
           <EntitySet Name="Templete" EntityType="Self.Templete" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MegaGenerateModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MegaGenerateEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="POST" EntityType="MegaGenerateModel.POST" />
+          <EntitySet Name="Templete" EntityType="MegaGenerateModel.Templete" />
+        </EntityContainer>
         <EntityType Name="POST">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+          <Property Name="TempleteId" Type="Int64" />
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="TitleDisp" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
@@ -68,16 +74,13 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+          <Property Name="DispImg" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TempleteName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="TempleteContent" Type="Binary" MaxLength="2147483647" FixedLength="false" />
           <Property Name="CreateDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="MegaGenerateEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="POST" EntityType="Self.POST" />
-          <EntitySet Name="Templete" EntityType="Self.Templete" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -87,32 +90,34 @@
           <EntitySetMapping Name="POST">
             <EntityTypeMapping TypeName="MegaGenerateModel.POST">
               <MappingFragment StoreEntitySet="POST">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="TitleDisp" ColumnName="TitleDisp" />
-                <ScalarProperty Name="TitleImg" ColumnName="TitleImg" />
-                <ScalarProperty Name="TitleImgDisp" ColumnName="TitleImgDisp" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Tag" ColumnName="Tag" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="LastEdit" ColumnName="LastEdit" />
-                <ScalarProperty Name="LastEditDate" ColumnName="LastEditDate" />
-                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
-                <ScalarProperty Name="HasMusic" ColumnName="HasMusic" />
-                <ScalarProperty Name="MusicList" ColumnName="MusicList" />
-                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
                 <ScalarProperty Name="ExtScript" ColumnName="ExtScript" />
+                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+                <ScalarProperty Name="MusicList" ColumnName="MusicList" />
+                <ScalarProperty Name="HasMusic" ColumnName="HasMusic" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+                <ScalarProperty Name="LastEditDate" ColumnName="LastEditDate" />
+                <ScalarProperty Name="LastEdit" ColumnName="LastEdit" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="TitleImgDisp" ColumnName="TitleImgDisp" />
+                <ScalarProperty Name="TitleImg" ColumnName="TitleImg" />
+                <ScalarProperty Name="TitleDisp" ColumnName="TitleDisp" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TempleteId" ColumnName="TempleteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Templete">
             <EntityTypeMapping TypeName="MegaGenerateModel.Templete">
               <MappingFragment StoreEntitySet="Templete">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TempleteName" ColumnName="TempleteName" />
-                <ScalarProperty Name="TempleteContent" ColumnName="TempleteContent" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="TempleteContent" ColumnName="TempleteContent" />
+                <ScalarProperty Name="TempleteName" ColumnName="TempleteName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DispImg" ColumnName="DispImg" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
