@@ -434,7 +434,7 @@ function generateUrl() {
     }
     //价格升序
     //价格降序
-    var priceasc = "o0";
+    var priceasc = "o2";
     //关注度
     var watchnum = "b";
     //出发日期升序
@@ -455,9 +455,9 @@ function generateUrl() {
     }
     var sortstr = tag + oi;
     if (sortstr == "data-pricedesc") {
-        priceasc = "o1";
+        priceasc = "o0";
     }else if (sortstr == "data-priceasc") {
-        priceasc = "o2";
+        priceasc = "o1";
     } else if (sortstr == "data-hotasc") {
         watchnum = "a";
     } else if (sortstr == "data-date-scaledesc") {
@@ -472,7 +472,7 @@ function generateUrl() {
     if (ship != "cr0") { resultUrl += ship + "-"; }
     if (godate != "dd0") { resultUrl += godate + "-"; }
     if (day != "x0") { resultUrl += day + "-"; }
-    if (priceasc != "o0") { resultUrl += priceasc + "-"; }
+    if (priceasc != "o2") { resultUrl += priceasc + "-"; }
     if (watchnum != "b") { resultUrl += watchnum + "-"; }
     if (godateasc != "o0") { resultUrl += godateasc + "-"; }
     if (godatedesc != "d0") { resultUrl += godatedesc + "-"; }
