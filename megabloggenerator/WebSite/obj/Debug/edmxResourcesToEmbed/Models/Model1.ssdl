@@ -4,6 +4,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
+    <Property Name="TempleteId" Type="integer" />
     <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="2147483647" />
     <Property Name="TitleDisp" Type="nvarchar" MaxLength="2147483647" />
@@ -24,6 +25,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
+    <Property Name="DispImg" Type="nvarchar" MaxLength="2147483647" />
     <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TempleteName" Type="nvarchar" MaxLength="2147483647" />
     <Property Name="TempleteContent" Type="blob" />
