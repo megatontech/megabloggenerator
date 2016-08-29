@@ -189,8 +189,6 @@ function chooseSorter() {
         if ($('#j_sortList_loader').get(0)) {
             //alert('请稍等');
         }
-
-        //unitFilter();
         pageSelectionChange();
     });
 }
@@ -242,7 +240,6 @@ function unitFilter() {
             oi = 'desc';
         }
     }
-
     initSorter(params, tag, oi);
 }
 
@@ -348,9 +345,7 @@ function listPager() {
 
         });
     }
-
-
-
+    resetFilterItems();
 }
 
 //跳转到顶部
@@ -379,7 +374,7 @@ function scrollFloat() {
 
 }
 function generateUrl() {
-    //demo :http://localhost:18203/youlun/r145076-c8610-cc12-cr13938-dd13-x5-o1-a-o5-d1-dis000.html
+    //demo URL:http://localhost:18203/youlun/r-c-cc-cr-dd-x-00-0-00.html
     var url = window.location.href;
     var host = window.location.href.split('youlun/')[0];
     //params "data-route=日韩邮轮航线,data-port=上海,data-brand=歌诗达邮轮赛琳娜号,data-date=2016年8月,data-day=3-5天"
@@ -462,22 +457,7 @@ function generateUrl() {
     } else if (sortstr == "data-date-scaleasc") {
         godateasc = "d1";
     }
-    //url rule change : r0-c0-cc0-cr0-dd0-x0-o0-b-o0-d0-dis0
-//    if (route != "r0") { resultUrl += route + "-"; }
-//    if (port != "c0") { resultUrl += port + "-"; }
-//    if (company != "cc0") { resultUrl += company + "-"; }
-//    if (ship != "cr0") { resultUrl += ship + "-"; }
-//    if (godate != "dd0") { resultUrl += godate + "-"; }
-//    if (day != "x0") { resultUrl += day + "-"; }
-//    if (priceasc != "o2") { resultUrl += priceasc + "-"; }
-//    if (watchnum != "b") { resultUrl += watchnum + "-"; }
-//    if (godateasc != "o0") { resultUrl += godateasc + "-"; }
-//    if (godatedesc != "d0") { resultUrl += godatedesc + "-"; }
-//    if (discount != "dis0") { resultUrl += discount + "-"; }
     resultUrl += (route + "-" + port + "-" + company + "-" + ship + "-" + godate + "-" + day + "-" + priceasc + "-" + watchnum + "-" + godateasc  );
-//    if (resultUrl == "youlun/") { resultUrl = "youlun/youlunhangxian"; }
-//    else { resultUrl = resultUrl.substring(0, resultUrl.length - 1); }
-   // console.log(host + resultUrl + ".html");
     return host + resultUrl + ".html";
 }
 function getCompanyCodeByShip(ship) {
@@ -494,7 +474,7 @@ function pageSelectionChange() {
         changeUrl(generateUrl());
     }
     else {
-        //change title
+        //change THE title
         var port = "";
         var route = "";
         var params = getFilteredParams();
@@ -511,19 +491,74 @@ function pageSelectionChange() {
             }
         }
         if (port.length > 0 && route.length > 0) {
-            $("title").html(port + "到" + route + "游轮旅游报价_日韩邮轮航线旅游价格_悠哉旅游网");
+            $("title").html(port + "到" + route + "游轮旅游报价_" + route + "旅游价格_悠哉旅游网");
         } else if (port.length > 0 && !route.length) {
-            $("title").html(port + "游轮旅游报价_日韩邮轮航线旅游价格_悠哉旅游网");
+            $("title").html(port + "游轮旅游报价_旅游价格_悠哉旅游网");
         } else if (!port.length && route.length > 0) {
-            $("title").html(route + "游轮旅游报价_日韩邮轮航线旅游价格_悠哉旅游网");
+            $("title").html(route + "游轮旅游报价_" + route + "旅游价格_悠哉旅游网");
         } else {
-            $("title").html("游轮旅游报价_日韩邮轮航线旅游价格_悠哉旅游网");
+            $("title").html("游轮旅游报价_旅游价格_悠哉旅游网");
         }
         unitFilter();
         window.history.replaceState(null, document.title, generateUrl());
     }
 }
-
+//根据当前所选条件，更改其他筛选器可用性，以保证列表始终能搜索到产品
+function resetFilterItems() {
+    //获取当前的选中条件
+    var allSels = [];
+    //获取所有查询条件
+    $('#j_sideSizer .sizer-item').each(function (k, v) {
+        if ($(this).attr('data-v')) { allSels.push($(this).attr('data-v')); }
+    });
+    //标识是否进行了分页和过滤
+    var currListCount = $("#j_sortList .line-list .list-item").length;
+    //遍历列表过滤项选出有效的项
+    var enabledSels = [];
+    $("#j_sortList .line-list .list-item").each(function () {
+        var ship = $(this);
+        for (var unsel in allSels) {
+            var attrName = allSels[unsel].split('=')[0];
+            var attrVal = allSels[unsel].split('=')[1];
+            if (ship.attr(attrName) == attrVal) {
+                enabledSels.push(allSels[unsel]);
+            }
+        }
+    });
+    //重置所有禁用和样式
+    for (var sel in allSels) {
+        $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").removeClass("sizer-off");
+        $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").css("color", "black");
+    }
+    var it = $('#j_sideSizer').find('.sub-pop').find('.sizer-item');
+    it.on('click', function () {
+        var o = $(this);
+        if (o.hasClass('sizer-off')) {
+            return;
+        }
+        var ov = o.attr('data-v');
+        var op = o.parents('.sub-pop');
+        var ot = op.siblings('.item-cont').find('.item-bd');
+        if (o.html().length > 10) { ot.text(o.html().substring(o.html().length - 10, o.html().length)); } else { ot.text(o.html()); }
+        ot.attr('data-v', o.attr('data-v'));
+        op.hide();
+        pageSelectionChange();
+    });
+    //设置未选中的其他项的可用性
+    for (var sel in allSels) {
+        var IsExistEnable = false;
+        for (var enabledSel in enabledSels) {
+            if (allSels[sel] == enabledSels[enabledSel]) {
+                IsExistEnable = true; 
+            } 
+        }
+        if (!IsExistEnable && currListCount!=0) {
+            $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").addClass("sizer-off");
+            $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").css("color", "gray");
+            $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").unbind("click");
+        } 
+    }
+}
 function dispShip() {
     var name = $("#j_sideSizer .list-item-3 .item-bd.fr").text();
     $('.yl-intro-bar').css('display', 'none'); $('#intro-bar-' + name + '').css('display', 'block');
