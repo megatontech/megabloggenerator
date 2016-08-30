@@ -63,6 +63,7 @@ function slideBarFilter() {
     nd.find('.arrow-mod').find('i[class^=i-close]').on('click', function () {
         var o = $(this);
         var ot = o.parent('.arrow-mod').prev('.item-bd');
+        if (ot.attr("data-v").lastIndexOf('data-brand') != -1) { $(".yl-intro-bar ").css("display", "none"); }
         ot.text('');
         ot.removeAttr('data-v');
         o.hide();
@@ -80,7 +81,7 @@ function slideBarFilter() {
         var op = o.parents('.sub-pop');
         var ot = op.siblings('.item-cont').find('.item-bd');
         //文字过长会无法显示
-        if (o.html().length > 10) {ot.text(o.html().substring(o.html().length-10, o.html().length));} else { ot.text(o.html()); }
+        if (o.html().length > 10) { ot.text(o.html().substring(o.html().length - 10, o.html().length)); } else { ot.text(o.html()); }
         ot.attr('data-v', o.attr('data-v'));
         op.hide();
         pageSelectionChange();
@@ -95,7 +96,7 @@ function chooseSorter() {
 
         var o = $(this);
         var os = o.siblings('.menu-wrap');
-        var osm = o.find('.sub-menu');//子菜单
+        var osm = o.find('.sub-menu'); //子菜单
 
         if (osm.get(0)) {
             return;
@@ -137,7 +138,7 @@ function chooseSorter() {
     jsb.find('.sub-menu').find('.list-item').on('click', function () {
 
         var o = $(this);
-        var omenu = o.parents('.sub-menu');//当前菜单
+        var omenu = o.parents('.sub-menu'); //当前菜单
 
         var op = o.parents('.menu-wrap');
         var ops = op.siblings('.menu-wrap');
@@ -207,7 +208,7 @@ function getFilteredParams() {
     });
 
     //横向导航下拉筛选
-    var cks = $('#j_listSortBar').find('input:checked');//选中的input check
+    var cks = $('#j_listSortBar').find('input:checked'); //选中的input check
 
     cks.each(function (k, v) {
         var ck = $(this);
@@ -283,7 +284,7 @@ function listPager() {
 
             pager.uzPager({
                 pageSize: pageSize,
-                pageItems: pageItems,//列表条数
+                pageItems: pageItems, //列表条数
                 targetNode: pager.siblings('.pager-target-node'),
                 onInit: function (allPage) {
                     //console.log('pager 初始化完成');
@@ -448,7 +449,7 @@ function generateUrl() {
     var sortstr = tag + oi;
     if (sortstr == "data-pricedesc") {
         priceasc = "o0";
-    }else if (sortstr == "data-priceasc") {
+    } else if (sortstr == "data-priceasc") {
         priceasc = "o1";
     } else if (sortstr == "data-hotasc") {
         watchnum = "a";
@@ -457,7 +458,7 @@ function generateUrl() {
     } else if (sortstr == "data-date-scaleasc") {
         godateasc = "d1";
     }
-    resultUrl += (route + "-" + port + "-" + company + "-" + ship + "-" + godate + "-" + day + "-" + priceasc + "-" + watchnum + "-" + godateasc  );
+    resultUrl += (route + "-" + port + "-" + company + "-" + ship + "-" + godate + "-" + day + "-" + priceasc + "-" + watchnum + "-" + godateasc);
     return host + resultUrl + ".html";
 }
 function getCompanyCodeByShip(ship) {
@@ -469,39 +470,40 @@ function changeUrl(url) {
 }
 
 function pageSelectionChange() {
-    if (!window.history.replaceState) {
-        console.log("not supported!");
-        changeUrl(generateUrl());
-    }
-    else {
-        //change THE title
-        var port = "";
-        var route = "";
-        var params = getFilteredParams();
-        var paraArray = params.split(',');
-        if (params.indexOf(",") === -1) {
-            paraArray.push(params);
-        }
-        for (var para in paraArray) {
-            if (paraArray[para].indexOf("route") !== -1) {
-                route = paraArray[para].split("=")[1].split("_")[0];
-            }
-            if (paraArray[para].indexOf("port") !== -1) {
-                port = paraArray[para].split("=")[1].split("_")[0];
-            }
-        }
-        if (port.length > 0 && route.length > 0) {
-            $("title").html(port + "到" + route + "游轮旅游报价_" + route + "旅游价格_悠哉旅游网");
-        } else if (port.length > 0 && !route.length) {
-            $("title").html(port + "游轮旅游报价_旅游价格_悠哉旅游网");
-        } else if (!port.length && route.length > 0) {
-            $("title").html(route + "游轮旅游报价_" + route + "旅游价格_悠哉旅游网");
-        } else {
-            $("title").html("游轮旅游报价_旅游价格_悠哉旅游网");
-        }
-        unitFilter();
-        window.history.replaceState(null, document.title, generateUrl());
-    }
+    changeUrl(generateUrl());
+    //    if (!window.history.replaceState) {
+    //        console.log("not supported!");
+    //        changeUrl(generateUrl());
+    //    }
+    //    else {
+    //        //change THE title
+    //        var port = "";
+    //        var route = "";
+    //        var params = getFilteredParams();
+    //        var paraArray = params.split(',');
+    //        if (params.indexOf(",") === -1) {
+    //            paraArray.push(params);
+    //        }
+    //        for (var para in paraArray) {
+    //            if (paraArray[para].indexOf("route") !== -1) {
+    //                route = paraArray[para].split("=")[1].split("_")[0];
+    //            }
+    //            if (paraArray[para].indexOf("port") !== -1) {
+    //                port = paraArray[para].split("=")[1].split("_")[0];
+    //            }
+    //        }
+    //        if (port.length > 0 && route.length > 0) {
+    //            $("title").html(port + "到" + route + "游轮旅游报价_" + route + "旅游价格_悠哉旅游网");
+    //        } else if (port.length > 0 && !route.length) {
+    //            $("title").html(port + "游轮旅游报价_旅游价格_悠哉旅游网");
+    //        } else if (!port.length && route.length > 0) {
+    //            $("title").html(route + "游轮旅游报价_" + route + "旅游价格_悠哉旅游网");
+    //        } else {
+    //            $("title").html("游轮旅游报价_旅游价格_悠哉旅游网");
+    //        }
+    //        unitFilter();
+    //        window.history.replaceState(null, document.title, generateUrl());
+    //    }
 }
 //根据当前所选条件，更改其他筛选器可用性，以保证列表始终能搜索到产品
 function resetFilterItems() {
@@ -521,42 +523,42 @@ function resetFilterItems() {
             var attrName = allSels[unsel].split('=')[0];
             var attrVal = allSels[unsel].split('=')[1];
             if (ship.attr(attrName) == attrVal) {
-                enabledSels.push(allSels[unsel]);
+                if ($.inArray(allSels[unsel], enabledSels) == -1) {
+                    enabledSels.push(allSels[unsel]);
+                }
             }
         }
     });
     //重置所有禁用和样式
-    for (var sel in allSels) {
-        $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").removeClass("sizer-off");
-        $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").css("color", "black");
-    }
-    var it = $('#j_sideSizer').find('.sub-pop').find('.sizer-item');
-    it.on('click', function () {
-        var o = $(this);
-        if (o.hasClass('sizer-off')) {
-            return;
-        }
-        var ov = o.attr('data-v');
-        var op = o.parents('.sub-pop');
-        var ot = op.siblings('.item-cont').find('.item-bd');
-        if (o.html().length > 10) { ot.text(o.html().substring(o.html().length - 10, o.html().length)); } else { ot.text(o.html()); }
-        ot.attr('data-v', o.attr('data-v'));
-        op.hide();
-        pageSelectionChange();
-    });
+    //    for (var sel in allSels) {
+    //        $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").removeClass("sizer-off").css("color", "black");
+    //    }
+    //    var it = $('#j_sideSizer').find('.sub-pop').find('.sizer-item');
+    //    it.on('click', function () {
+    //        var o = $(this);
+    //        if (o.hasClass('sizer-off')) {
+    //            return;
+    //        }
+    //        var ov = o.attr('data-v');
+    //        var op = o.parents('.sub-pop');
+    //        var ot = op.siblings('.item-cont').find('.item-bd');
+    //        if (o.html().length > 10) { ot.text(o.html().substring(o.html().length - 10, o.html().length)); } else { ot.text(o.html()); }
+    //        ot.attr('data-v', o.attr('data-v'));
+    //        op.hide();
+    //        pageSelectionChange();
+    //    });
     //设置未选中的其他项的可用性
-    for (var sel in allSels) {
+    for (var se in allSels) {
         var IsExistEnable = false;
         for (var enabledSel in enabledSels) {
-            if (allSels[sel] == enabledSels[enabledSel]) {
-                IsExistEnable = true; 
-            } 
+            if (allSels[se] == enabledSels[enabledSel]) {
+                IsExistEnable = true;
+            }
         }
-        if (!IsExistEnable && currListCount!=0) {
-            $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").addClass("sizer-off");
-            $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").css("color", "gray");
-            $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").unbind("click");
-        } 
+        if (!IsExistEnable && currListCount !== 0) {
+            $("#j_sideSizer  .sizer-item[data-v='" + allSels[se] + "']").css("display", "none");
+            $("#j_sideSizer  .sizer-item[data-v='" + allSels[se] + "']").addClass("sizer-off").css("color", "gray").unbind("click");
+        }
     }
 }
 function dispShip() {
