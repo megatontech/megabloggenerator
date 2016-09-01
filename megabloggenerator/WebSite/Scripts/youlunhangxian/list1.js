@@ -247,9 +247,8 @@ function unitFilter() {
 //原子筛选
 function initSorter(tag, atag, akey) {
     var list = $('#j_sortList');
-
+    if(atag=='data-index'||atag=='data-hot'){akey='desc'}
     console.log(tag, '~', atag, '~', akey);
-
     $('#j_sortList_null').remove();
 
     if (list.get(0)) {
@@ -261,7 +260,7 @@ function initSorter(tag, atag, akey) {
             sortAscTag: atag || '',
             sortAscKey: akey || 'asc',
             targetNull: "<div class='box-fix'><div class='fruitless-box tc'><i class='icon-item mr10 vm icon-common-bulky png'></i><span class='fb-cont f16 tl vm'><p>未找到<em class='blue f18 b'>XXX</em>相关的邮轮产品，您可以尝试其他关键字搜索</p><p>您也可以在<b class='red f18'>9：00~21：00</b>拨打<b class='red f18'>1010-9898</b>联系客服，我们将竭诚为您服务。</p></span></div></div>",
-            tragetAjaxText: "<p class='tc yahei f24 f666'><img src='//r.uzaicdn.com/content/v1/images/common/loader.gif' />数据载入中...</p>",
+            tragetAjaxText: "",
             onInit: function () {
                 listPager();
             },
@@ -471,39 +470,6 @@ function changeUrl(url) {
 
 function pageSelectionChange() {
     changeUrl(generateUrl());
-//    if (!window.history.replaceState) {
-//        console.log("not supported!");
-//        changeUrl(generateUrl());
-//    }
-//    else {
-//        //change THE title
-//        var port = "";
-//        var route = "";
-//        var params = getFilteredParams();
-//        var paraArray = params.split(',');
-//        if (params.indexOf(",") === -1) {
-//            paraArray.push(params);
-//        }
-//        for (var para in paraArray) {
-//            if (paraArray[para].indexOf("route") !== -1) {
-//                route = paraArray[para].split("=")[1].split("_")[0];
-//            }
-//            if (paraArray[para].indexOf("port") !== -1) {
-//                port = paraArray[para].split("=")[1].split("_")[0];
-//            }
-//        }
-//        if (port.length > 0 && route.length > 0) {
-//            $("title").html(port + "到" + route + "游轮旅游报价_" + route + "旅游价格_悠哉旅游网");
-//        } else if (port.length > 0 && !route.length) {
-//            $("title").html(port + "游轮旅游报价_旅游价格_悠哉旅游网");
-//        } else if (!port.length && route.length > 0) {
-//            $("title").html(route + "游轮旅游报价_" + route + "旅游价格_悠哉旅游网");
-//        } else {
-//            $("title").html("游轮旅游报价_旅游价格_悠哉旅游网");
-//        }
-//        unitFilter();
-//        window.history.replaceState(null, document.title, generateUrl());
-//    }
 }
 //根据当前所选条件，更改其他筛选器可用性，以保证列表始终能搜索到产品
 function resetFilterItems() {
@@ -529,24 +495,7 @@ function resetFilterItems() {
             }
         }
     });
-    //重置所有禁用和样式
-//    for (var sel in allSels) {
-//        $("#j_sideSizer  .sizer-item[data-v='" + allSels[sel] + "']").removeClass("sizer-off").css("color", "black");
-//    }
-//    var it = $('#j_sideSizer').find('.sub-pop').find('.sizer-item');
-//    it.on('click', function () {
-//        var o = $(this);
-//        if (o.hasClass('sizer-off')) {
-//            return;
-//        }
-//        var ov = o.attr('data-v');
-//        var op = o.parents('.sub-pop');
-//        var ot = op.siblings('.item-cont').find('.item-bd');
-//        if (o.html().length > 10) { ot.text(o.html().substring(o.html().length - 10, o.html().length)); } else { ot.text(o.html()); }
-//        ot.attr('data-v', o.attr('data-v'));
-//        op.hide();
-//        pageSelectionChange();
-//    });
+    $(".nosizer-item").each(function () { if ($(this).parents().next().find(".sizer-item.sizer-off").length == 12) { $(this).css("display", "none") } })
     //设置未选中的其他项的可用性
     for (var se in allSels) {
         var IsExistEnable = false;
@@ -557,7 +506,6 @@ function resetFilterItems() {
         }
         if (!IsExistEnable && currListCount !== 0) {
             $("#j_sideSizer  .sizer-item[data-v='" + allSels[se] + "']").css("display", "none");
-            $("#j_sideSizer  .sizer-item[data-v='" + allSels[se] + "']").addClass("sizer-off").css("color", "gray").unbind("click");
         } 
     }
 }
