@@ -262,7 +262,7 @@ function initSorter(tag, atag, akey) {
             targetNull: "<div class='box-fix'><div class='fruitless-box tc'><i class='icon-item mr10 vm icon-common-bulky png'></i><span class='fb-cont f16 tl vm'><p>未找到<em class='blue f18 b'>XXX</em>相关的邮轮产品，您可以尝试其他关键字搜索</p><p>您也可以在<b class='red f18'>9：00~21：00</b>拨打<b class='red f18'>1010-9898</b>联系客服，我们将竭诚为您服务。</p></span></div></div>",
             tragetAjaxText: "",
             onInit: function () {
-                listPager();
+               // listPager();
             },
             onCallback: function () {
                 listPager();
@@ -283,12 +283,9 @@ function listPager() {
 
             pager.uzPager({
                 pageSize: pageSize,
-                pageItems: pageItems,//列表条数
+                pageItems: pageItems, //列表条数
                 targetNode: pager.siblings('.pager-target-node'),
                 onInit: function (allPage) {
-                    //console.log('pager 初始化完成');
-                    //console.log(allPage);
-
                     //触发上下分页
                     var jp = $('#j_paging');
                     var jpl = jp.find('.btn-prev');
@@ -317,9 +314,7 @@ function listPager() {
                 },
                 onCallback: function (currentPage, allPage) {
                     //分页事件 ajax or dom handle
-
                     skipToPoint();
-
                     //触发上下分页状态
                     var jp = $('#j_paging');
                     var jpl = jp.find('.btn-prev');
