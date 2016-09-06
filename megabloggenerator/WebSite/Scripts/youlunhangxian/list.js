@@ -498,7 +498,7 @@ function resetFilterItems() {
         }
     });
     $(".nosizer-item").each(function() {
-        if ($(this).parents().next().find(".sizer-item.sizer-off").length === 12) {
+        if ($(this).parent().next().find(".sizer-item.sizer-off").length === 12) {
             $(this).css("display", "none");
         }
     });
