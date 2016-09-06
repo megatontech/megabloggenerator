@@ -490,7 +490,7 @@ function resetFilterItems() {
             }
         }
     });
-    $(".nosizer-item").each(function () { if ($(this).parents().next().find(".sizer-item.sizer-off").length == 12) { $(this).css("display", "none") } })
+    $(".nosizer-item").each(function () { if ($(this).parent().next().find(".sizer-item.sizer-off").length == 12) { $(this).css("display", "none") } })
     //设置未选中的其他项的可用性
     for (var se in allSels) {
         var IsExistEnable = false;
