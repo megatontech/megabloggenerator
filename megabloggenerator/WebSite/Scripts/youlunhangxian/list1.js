@@ -14,6 +14,7 @@ $(function () {
     chooseSorter();
     scrollFloat();
     dispShip();
+    
 });
 
 //初始化表单，防刷新状态保存
@@ -468,6 +469,8 @@ function pageSelectionChange() {
 }
 //根据当前所选条件，更改其他筛选器可用性，以保证列表始终能搜索到产品
 function resetFilterItems() {
+
+    
     //获取当前的选中条件
     var allSels = [];
     //获取所有查询条件
@@ -501,9 +504,17 @@ function resetFilterItems() {
         }
         if (!IsExistEnable && currListCount !== 0) {
             $("#j_sideSizer  .sizer-item[data-v='" + allSels[se] + "']").css("display", "none");
-        } 
+        }
     }
+    setSingleSelection();
 }
+function setSingleSelection() {
+    //首次选中的项不消失
+    var selectionParam = getFilteredParams();
+    if (selectionParam.length > 0 && selectionParam.lastIndexOf(",") < 0) {
+        var selectionParam = getFilteredParams(); $(".sizer-item").each(function () { if ($(this).attr("data-v") == selectionParam) { $(this).css("color","#0099d9"); $(this).parent().children(".sizer-item").css("display", "");  } })
+    }
+ }
 function dispShip() {
     var name = $("#j_sideSizer .list-item-3 .item-bd.fr").text();
     $('.yl-intro-bar').css('display', 'none'); $('#intro-bar-' + name + '').css('display', 'block');
