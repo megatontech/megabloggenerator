@@ -75,6 +75,21 @@ function slideBarFilter() {
     var it = nd.find('.sub-pop').find('.sizer-item');
     it.on('click', function () {
         var o = $(this);
+        var currentSelection = o.attr("data-v");
+        var currentSelectionType = o.attr("data-v").split('=')[0];
+        var currentSelectionBro = [];
+        $(this).parent().find('.sizer-item').each(function () {
+            if ($(this).css("display") != 'none') { currentSelectionBro.push($(this).attr("data-v")); }
+        });
+        console.log(currentSelectionBro);
+        if (window.localStorage) {
+            console.log(currentSelection);
+            console.log(currentSelectionType);
+            console.log(currentSelectionBro);
+            window.localStorage.currentSelection = currentSelection;
+            window.localStorage.currentSelectionType = currentSelectionType;
+            window.localStorage.currentSelectionBro = currentSelectionBro;
+        }
         if (o.hasClass('sizer-off')) {
             return;
         }
@@ -82,7 +97,7 @@ function slideBarFilter() {
         var op = o.parents('.sub-pop');
         var ot = op.siblings('.item-cont').find('.item-bd');
         //文字过长会无法显示
-        if (o.html().length > 10) {ot.text(o.html().substring(o.html().length-10, o.html().length));} else { ot.text(o.html()); }
+        if (o.html().length > 10) { ot.text(o.html().substring(o.html().length - 10, o.html().length)); } else { ot.text(o.html()); }
         ot.attr('data-v', o.attr('data-v'));
         op.hide();
         pageSelectionChange();
@@ -229,6 +244,7 @@ function unitFilter() {
     //过滤的参数
     var params = getFilteredParams();
 
+    
     //排序的参数
     var itemon = jsb.children('.bar-main').children('.on');
     var itemonmenu = itemon.find('.sub-menu');
@@ -469,8 +485,6 @@ function pageSelectionChange() {
 }
 //根据当前所选条件，更改其他筛选器可用性，以保证列表始终能搜索到产品
 function resetFilterItems() {
-
-    
     //获取当前的选中条件
     var allSels = [];
     //获取所有查询条件
@@ -509,10 +523,34 @@ function resetFilterItems() {
     setSingleSelection();
 }
 function setSingleSelection() {
-    //首次选中的项不消失
     var selectionParam = getFilteredParams();
-    if (selectionParam.length > 0 && selectionParam.lastIndexOf(",") < 0) {
-        var selectionParam = getFilteredParams(); $(".sizer-item").each(function () { if ($(this).attr("data-v") == selectionParam) { $(this).css("color","#0099d9"); $(this).parent().children(".sizer-item").css("display", "");  } })
+    var selectionParamArray = selectionParam.split(',');
+    var currentSelection;
+    var currentSelectionType;
+    var currentSelectionBro;
+    if(window.localStorage){
+        currentSelection = window.localStorage.currentSelection;
+        currentSelectionType = window.localStorage.currentSelectionType;
+        currentSelectionBro = window.localStorage.currentSelectionBro ;
+    }
+    var currentSelectionBroArray = []
+    if (currentSelectionBro) {
+        currentSelectionBroArray = currentSelectionBro.split(',');
+    }
+    if (selectionParam.length > 0 ) {
+        $(".sizer-item").each(function () {
+            if (currentSelectionBroArray) {
+            for (var i = 0; i < currentSelectionBroArray.length; i++) { if ($(this).attr("data-v") == currentSelectionBroArray[i]) { $(this).css("display", ""); } }
+        }
+            if (selectionParamArray) { 
+            
+            for (var i = 0; i < selectionParamArray.length; i++) {
+                if ($(this).attr("data-v") == selectionParamArray[i]) {
+                    $(this).css("color", "#0099d9");
+                }
+            } 
+        }
+        });
     }
  }
 function dispShip() {
