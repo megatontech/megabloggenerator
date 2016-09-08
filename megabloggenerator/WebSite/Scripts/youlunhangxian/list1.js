@@ -5,23 +5,24 @@
 * @Last Modified time: 2016-08-26 09:12:35
 */
 'use strict';
-
+var isUrlJump = false;
 $(function () {
-    initPage();
-    uzLazy(['line-list']);
-    slideBarFilter();
-    unitFilter();
-    chooseSorter();
-    scrollFloat();
-    dispShip();
-    
+    if (!isUrlJump) {
+        initPage();
+        uzLazy(['line-list']);
+        slideBarFilter();
+        unitFilter();
+        chooseSorter();
+        scrollFloat();
+        dispShip();
+        $("#j_sortList").css("display", "");
+    }
 });
 
 //初始化表单，防刷新状态保存
 function initPage() {
     $('#j_listSortBar').find('input').prop('checked', false);
 }
-
 
 //点击左侧大节点筛选
 function slideBarFilter() {
@@ -62,34 +63,20 @@ function slideBarFilter() {
 
     // empty value
     nd.find('.arrow-mod').find('i[class^=i-close]').on('click', function () {
+        isUrlJump = true;
         var o = $(this);
         var ot = o.parent('.arrow-mod').prev('.item-bd');
         if (ot.attr("data-v").lastIndexOf('data-brand') != -1) { $(".yl-intro-bar ").css("display", "none"); }
         ot.text('');
         ot.removeAttr('data-v');
         o.hide();
-        //unitFilter();
         pageSelectionChange();
     });
 
     var it = nd.find('.sub-pop').find('.sizer-item');
     it.on('click', function () {
+        isUrlJump = true;
         var o = $(this);
-        var currentSelection = o.attr("data-v");
-        var currentSelectionType = o.attr("data-v").split('=')[0];
-        var currentSelectionBro = [];
-        $(this).parent().find('.sizer-item').each(function () {
-            if ($(this).css("display") != 'none') { currentSelectionBro.push($(this).attr("data-v")); }
-        });
-        console.log(currentSelectionBro);
-        if (window.localStorage) {
-            console.log(currentSelection);
-            console.log(currentSelectionType);
-            console.log(currentSelectionBro);
-            window.localStorage.currentSelection = currentSelection;
-            window.localStorage.currentSelectionType = currentSelectionType;
-            window.localStorage.currentSelectionBro = currentSelectionBro;
-        }
         if (o.hasClass('sizer-off')) {
             return;
         }
@@ -109,7 +96,6 @@ function chooseSorter() {
     var jsb = $('#j_listSortBar');
 
     jsb.find('.menu-wrap').on('click', function () {
-
         var o = $(this);
         var os = o.siblings('.menu-wrap');
         var osm = o.find('.sub-menu');//子菜单
@@ -117,7 +103,6 @@ function chooseSorter() {
         if (osm.get(0)) {
             return;
         }
-
         //重置原始文字
         jsb.find('.menu-wrap[data-tag=price]').find('.menu-hd').find('em').text('价格');
         jsb.find('.menu-wrap[data-tag=date]').find('.menu-hd').find('em').text('出发日期');
@@ -134,8 +119,6 @@ function chooseSorter() {
         if ($('#j_sortList_loader').get(0)) {
             window.alert('请稍等');
         }
-
-        //unitFilter();
         pageSelectionChange();
     });
 
@@ -243,22 +226,20 @@ function unitFilter() {
 
     //过滤的参数
     var params = getFilteredParams();
-
-    
     //排序的参数
     var itemon = jsb.children('.bar-main').children('.on');
     var itemonmenu = itemon.find('.sub-menu');
-
     var tag = itemon.attr('rel');
     var oi = 'asc';
-
     if (itemonmenu.get(0)) {
         //多重筛选
         if (itemon.find('.icon-desc').get(0)) {
             oi = 'desc';
         }
     }
-    initSorter(params, tag, oi);
+    if (!isUrlJump) {
+        initSorter(params, tag, oi);
+    }
 }
 
 //原子筛选
@@ -520,39 +501,7 @@ function resetFilterItems() {
             $("#j_sideSizer  .sizer-item[data-v='" + allSels[se] + "']").css("display", "none");
         }
     }
-    setSingleSelection();
 }
-function setSingleSelection() {
-    var selectionParam = getFilteredParams();
-    var selectionParamArray = selectionParam.split(',');
-    var currentSelection;
-    var currentSelectionType;
-    var currentSelectionBro;
-    if(window.localStorage){
-        currentSelection = window.localStorage.currentSelection;
-        currentSelectionType = window.localStorage.currentSelectionType;
-        currentSelectionBro = window.localStorage.currentSelectionBro ;
-    }
-    var currentSelectionBroArray = []
-    if (currentSelectionBro) {
-        currentSelectionBroArray = currentSelectionBro.split(',');
-    }
-    if (selectionParam.length > 0 ) {
-        $(".sizer-item").each(function () {
-            if (currentSelectionBroArray) {
-            for (var i = 0; i < currentSelectionBroArray.length; i++) { if ($(this).attr("data-v") == currentSelectionBroArray[i]) { $(this).css("display", ""); } }
-        }
-            if (selectionParamArray) { 
-            
-            for (var i = 0; i < selectionParamArray.length; i++) {
-                if ($(this).attr("data-v") == selectionParamArray[i]) {
-                    $(this).css("color", "#0099d9");
-                }
-            } 
-        }
-        });
-    }
- }
 function dispShip() {
     var name = $("#j_sideSizer .list-item-3 .item-bd.fr").text();
     $('.yl-intro-bar').css('display', 'none'); $('#intro-bar-' + name + '').css('display', 'block');
