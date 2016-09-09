@@ -2,25 +2,27 @@
 * @Author: jonas hsiao
 * @Date:   2016-06-12 09:25:15
 * @Last Modified by:   jonas hsiao
-* @Last Modified time: 2016-09-01 10:15:14
+* @Last Modified time: 2016-08-26 09:12:35
 */
 'use strict';
-
+var isUrlJump = false;
 $(function () {
-    initPage();
-    uzLazy(['line-list']);
-    slideBarFilter();
-    unitFilter();
-    chooseSorter();
-    scrollFloat();
-    dispShip();
+    if (!isUrlJump) {
+        initPage();
+        uzLazy(['line-list']);
+        slideBarFilter();
+        unitFilter();
+        chooseSorter();
+        scrollFloat();
+        dispShip();
+        $("#j_sortList").css("display", "");
+    }
 });
 
 //初始化表单，防刷新状态保存
 function initPage() {
     $('#j_listSortBar').find('input').prop('checked', false);
 }
-
 
 //点击左侧大节点筛选
 function slideBarFilter() {
@@ -61,18 +63,19 @@ function slideBarFilter() {
 
     // empty value
     nd.find('.arrow-mod').find('i[class^=i-close]').on('click', function () {
+        isUrlJump = true;
         var o = $(this);
         var ot = o.parent('.arrow-mod').prev('.item-bd');
         if (ot.attr("data-v").lastIndexOf('data-brand') != -1) { $(".yl-intro-bar ").css("display", "none"); }
         ot.text('');
         ot.removeAttr('data-v');
         o.hide();
-        //unitFilter();
         pageSelectionChange();
     });
 
     var it = nd.find('.sub-pop').find('.sizer-item');
     it.on('click', function () {
+        isUrlJump = true;
         var o = $(this);
         if (o.hasClass('sizer-off')) {
             return;
@@ -81,7 +84,7 @@ function slideBarFilter() {
         var op = o.parents('.sub-pop');
         var ot = op.siblings('.item-cont').find('.item-bd');
         //文字过长会无法显示
-        if (o.html().length > 10) {ot.text(o.html().substring(o.html().length-10, o.html().length));} else { ot.text(o.html()); }
+        if (o.html().length > 10) { ot.text(o.html().substring(o.html().length - 10, o.html().length)); } else { ot.text(o.html()); }
         ot.attr('data-v', o.attr('data-v'));
         op.hide();
         pageSelectionChange();
@@ -93,7 +96,6 @@ function chooseSorter() {
     var jsb = $('#j_listSortBar');
 
     jsb.find('.menu-wrap').on('click', function () {
-
         var o = $(this);
         var os = o.siblings('.menu-wrap');
         var osm = o.find('.sub-menu');//子菜单
@@ -101,7 +103,6 @@ function chooseSorter() {
         if (osm.get(0)) {
             return;
         }
-
         //重置原始文字
         jsb.find('.menu-wrap[data-tag=price]').find('.menu-hd').find('em').text('价格');
         jsb.find('.menu-wrap[data-tag=date]').find('.menu-hd').find('em').text('出发日期');
@@ -118,8 +119,6 @@ function chooseSorter() {
         if ($('#j_sortList_loader').get(0)) {
             window.alert('请稍等');
         }
-
-        //unitFilter();
         pageSelectionChange();
     });
 
@@ -227,21 +226,20 @@ function unitFilter() {
 
     //过滤的参数
     var params = getFilteredParams();
-
     //排序的参数
     var itemon = jsb.children('.bar-main').children('.on');
     var itemonmenu = itemon.find('.sub-menu');
-
     var tag = itemon.attr('rel');
     var oi = 'asc';
-
     if (itemonmenu.get(0)) {
         //多重筛选
         if (itemon.find('.icon-desc').get(0)) {
             oi = 'desc';
         }
     }
-    initSorter(params, tag, oi);
+    if (!isUrlJump) {
+        initSorter(params, tag, oi);
+    }
 }
 
 //原子筛选
@@ -264,7 +262,7 @@ function initSorter(tag, atag, akey) {
             targetNull: "<div class='box-fix'><div class='fruitless-box tc'><i class='icon-item mr10 vm icon-common-bulky png'></i><span class='fb-cont f16 tl vm'><p>未找到<em class='blue f18 b'>XXX</em>相关的邮轮产品，您可以尝试其他关键字搜索</p><p>您也可以在<b class='red f18'>9：00~21：00</b>拨打<b class='red f18'>1010-9898</b>联系客服，我们将竭诚为您服务。</p></span></div></div>",
             tragetAjaxText: "",
             onInit: function () {
-                listPager();
+                // listPager();
             },
             onCallback: function () {
                 listPager();
@@ -285,12 +283,9 @@ function listPager() {
 
             pager.uzPager({
                 pageSize: pageSize,
-                pageItems: pageItems,//列表条数
+                pageItems: pageItems, //列表条数
                 targetNode: pager.siblings('.pager-target-node'),
                 onInit: function (allPage) {
-                    //console.log('pager 初始化完成');
-                    //console.log(allPage);
-
                     //触发上下分页
                     var jp = $('#j_paging');
                     var jpl = jp.find('.btn-prev');
@@ -319,9 +314,7 @@ function listPager() {
                 },
                 onCallback: function (currentPage, allPage) {
                     //分页事件 ajax or dom handle
-
                     skipToPoint();
-
                     //触发上下分页状态
                     var jp = $('#j_paging');
                     var jpl = jp.find('.btn-prev');
@@ -459,7 +452,7 @@ function generateUrl() {
     } else if (sortstr == "data-date-scaleasc") {
         godateasc = "d1";
     }
-    resultUrl += (route + "-" + port + "-" + company + "-" + ship + "-" + godate + "-" + day + "-" + priceasc + "-" + watchnum + "-" + godateasc  );
+    resultUrl += (route + "-" + port + "-" + company + "-" + ship + "-" + godate + "-" + day + "-" + priceasc + "-" + watchnum + "-" + godateasc);
     return host + resultUrl + ".html";
 }
 function getCompanyCodeByShip(ship) {
@@ -497,8 +490,8 @@ function resetFilterItems() {
             }
         }
     });
-    $(".nosizer-item").each(function() {
-        if ($(this).parent().next().find(".sizer-item.sizer-off").length === 12) {
+    $(".nosizer-item").each(function () {
+        if ($(this).parent().next().find(".sizer-item.sizer-off").length == 12) {
             $(this).css("display", "none");
         }
     });
