@@ -359,19 +359,26 @@ function skipToPoint() {
 
 //滚动浮动
 function scrollFloat() {
+    var w = $(window);
     var jsb = $('#j_sideBar');
+    var sbOh = jsb.outerHeight(true);
     var jss = $('#j_sideSizer');
-    $(window).on('scroll', function () {
-        var ws = $(window).scrollTop();
+
+    w.on('scroll', function () {
+        var st = w.scrollTop();
         var ot = jsb.offset().top;
-        if (ws > ot) {
-            jss.addClass('side-sizer-on');
+        var iEnd = $('#j_sortList').siblings('.fn-pager').offset().top;
+
+        if (st > ot && st < iEnd - sbOh) {
+            jss.addClass('side-sizer-on').css({ 'position': 'fixed', 'top': 0 });
+        } else if (st >= iEnd - sbOh) {
+            jss.css({ 'position': 'absolute', 'top': iEnd - sbOh });
         } else {
-            jss.removeClass('side-sizer-on');
+            jss.removeClass('side-sizer-on').css({ 'position': 'static' });
         }
     });
 
-    $(window).trigger('scroll');
+    w.trigger('scroll');
 
 }
 function generateUrl() {
