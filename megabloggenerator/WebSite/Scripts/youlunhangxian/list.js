@@ -15,6 +15,8 @@ $(function () {
         chooseSorter();
         scrollFloat();
         dispShip();
+        $('#j_listSortBar').children('.bar-main').children('.on').find(".menu-hd .mr5.vm").text($('#j_listSortBar').children('.bar-main').children('.on').find(".list-item-on").text());
+        $("#j_listSortBar").css("display", "");
         $("#j_sortList").css("display", "");
     }
 });
@@ -70,6 +72,7 @@ function slideBarFilter() {
         ot.text('');
         ot.removeAttr('data-v');
         o.hide();
+        nd.children('.list-item').unbind('mouseenter').unbind('mouseleave');
         pageSelectionChange();
     });
 
@@ -87,6 +90,7 @@ function slideBarFilter() {
         if (o.html().length > 10) { ot.text(o.html().substring(o.html().length - 10, o.html().length)); } else { ot.text(o.html()); }
         ot.attr('data-v', o.attr('data-v'));
         op.hide();
+        nd.children('.list-item').unbind('mouseenter').unbind('mouseleave');
         pageSelectionChange();
     });
 }
@@ -468,6 +472,7 @@ function pageSelectionChange() {
 }
 //根据当前所选条件，更改其他筛选器可用性，以保证列表始终能搜索到产品
 function resetFilterItems() {
+    
     //获取当前的选中条件
     var allSels = [];
     //获取所有查询条件
