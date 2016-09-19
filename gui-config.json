@@ -1,0 +1,16 @@
+{
+"configs" : [
+  {
+"server" : "138.128.216.236",
+"server_port" : 443,
+"password" : "ZmJmZTdlYj",
+"method" : "aes-256-cfb",
+"remarks" : "ZmJmZTdlYj"}
+
+],
+"index" : 0,
+"global" : false,
+"enabled" : true,
+"shareOverLan" : false,
+"isDefault" : false,
+"localPort" : 1080}
