@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebSite.Helper;
+using WebSite.Models;
 
 namespace WebSite.Controllers
 {
@@ -17,7 +19,13 @@ namespace WebSite.Controllers
         // GET: Generate/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            PagePreview preview = new PagePreview();
+            using (var ctx = new WebSite.Models.MegaGenerateEntities())
+            {
+                preview.post = ctx.POST.Find(id);
+                preview.templete = ctx.Templete.Find(preview.post.TempleteId);
+            }
+            return View(preview);
         }
 
         // GET: Generate/Create
@@ -65,9 +73,20 @@ namespace WebSite.Controllers
         }
 
         [HttpGet]
-        public ActionResult Generate(int id)
+        public JsonResult Generate(int id)
         {
-            return View();
+            PagePreview preview = new PagePreview();
+            using (var ctx = new WebSite.Models.MegaGenerateEntities())
+            {
+                preview.post = ctx.POST.Find(id);
+                preview.templete = ctx.Templete.Find(preview.post.TempleteId);
+            }
+            CommonHelper helper = new CommonHelper();
+            string storagePath = Server.MapPath("/") + "\\blog\\"+DateTime.Now.Year+"\\"+DateTime.Now.Month+"\\";
+            string fileName = preview.post.Title+".html";
+            string pageName = "Details";
+            var result = helper.GeneratePage(storagePath, fileName, pageName, preview,ControllerContext);
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
 
         // POST: Generate/Delete/5

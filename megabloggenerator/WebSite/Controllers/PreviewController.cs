@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebSite.Models;
 
 namespace WebSite.Controllers
 {
@@ -17,7 +18,14 @@ namespace WebSite.Controllers
         // GET: Preview/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+
+            PagePreview preview = new PagePreview();
+            using (var ctx = new WebSite.Models.MegaGenerateEntities())
+            {
+                preview.post = ctx.POST.Find(id);
+                preview.templete = ctx.Templete.Find(preview.post.TempleteId);
+            }
+            return View(preview);
         }
 
         // GET: Preview/Create
