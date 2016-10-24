@@ -7,6 +7,6 @@ namespace WebSite.Models
 {
     public class PageIndex
     {
-        public List<Post> postList { get; set; }
+        public List<POST> postList { get; set; }
     }
 }
