@@ -10,7 +10,7 @@ namespace WebSite.Controllers
     public class PreviewController : Controller
     {
         // GET: Generate/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id = 1 )
         {
             PagePreview preview = new PagePreview();
             using (var ctx = new WebSite.Models.MegaGenerateEntities())
