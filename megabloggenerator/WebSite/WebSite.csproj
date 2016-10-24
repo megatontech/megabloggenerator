@@ -236,6 +236,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -254,6 +259,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
@@ -569,14 +576,8 @@
     <Content Include="Views\Templete\Details.cshtml" />
     <Content Include="Views\Templete\Create.cshtml" />
     <Content Include="Views\Templete\Edit.cshtml" />
-    <Content Include="Views\Preview\Create.cshtml" />
     <Content Include="Views\Preview\Details.cshtml" />
-    <Content Include="Views\Preview\Edit.cshtml" />
-    <Content Include="Views\Preview\List.cshtml" />
-    <Content Include="Views\Generate\List.cshtml" />
-    <Content Include="Views\Generate\Create.cshtml" />
     <Content Include="Views\Generate\Details.cshtml" />
-    <Content Include="Views\Generate\Edit.cshtml" />
     <Content Include="Views\Generate\Generate.cshtml" />
   </ItemGroup>
   <ItemGroup>
