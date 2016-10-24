@@ -46,7 +46,7 @@ namespace WebSite.Controllers
             pageindex.postList = PostList;
             CommonHelper helper = new CommonHelper();
             string storagePath = Server.MapPath("/") + "\\blog\\";
-            string fileName = index + ".html";
+            string fileName = "index.html";
             string pageName = "PageIndex";
             helper.GeneratePage(storagePath, fileName, pageName, pageindex, ControllerContext);
             return Json("(=ﾟωﾟ)=", JsonRequestBehavior.AllowGet);
