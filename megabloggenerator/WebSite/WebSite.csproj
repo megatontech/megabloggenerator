@@ -230,6 +230,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CommonHelper.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -240,6 +241,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PagePreview.cs" />
     <Compile Include="Models\POST.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -575,6 +577,7 @@
     <Content Include="Views\Generate\Create.cshtml" />
     <Content Include="Views\Generate\Details.cshtml" />
     <Content Include="Views\Generate\Edit.cshtml" />
+    <Content Include="Views\Generate\Generate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
