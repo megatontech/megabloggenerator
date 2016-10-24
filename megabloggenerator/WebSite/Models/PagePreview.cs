@@ -7,6 +7,7 @@ namespace WebSite.Models
 {
     public class PagePreview
     {
+        public string Content { get; set; }
         public POST post { get; set; }
         public Templete templete { get; set; }
     }

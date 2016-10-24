@@ -9,89 +9,17 @@ namespace WebSite.Controllers
 {
     public class PreviewController : Controller
     {
-        // GET: Preview
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Preview/Details/5
+        // GET: Generate/Details/5
         public ActionResult Details(int id)
         {
-
             PagePreview preview = new PagePreview();
             using (var ctx = new WebSite.Models.MegaGenerateEntities())
             {
                 preview.post = ctx.POST.Find(id);
+                preview.Content = System.Text.Encoding.Default.GetString(preview.post.Content);
                 preview.templete = ctx.Templete.Find(preview.post.TempleteId);
             }
             return View(preview);
-        }
-
-        // GET: Preview/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Preview/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Preview/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Preview/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Preview/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Preview/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

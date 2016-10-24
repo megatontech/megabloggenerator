@@ -23,6 +23,7 @@ namespace WebSite.Models
         public string CreateDate { get; set; }
         public string Tag { get; set; }
         public byte[] Content { get; set; }
+        public string ContentStr { get; set; }
         public string LastEdit { get; set; }
         public string LastEditDate { get; set; }
         public Nullable<long> DeleteFlag { get; set; }

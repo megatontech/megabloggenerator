@@ -1,4 +1,173 @@
-﻿@model WebSite.Models.POST
+﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" />
+<style>
+    body {
+        padding-top: 60px;
+        /* 60px to make the container go all the way to the bottom of the topbar */
+        padding-bottom: 10px;
+    }
+
+    #components {
+        min-height: 600px;
+    }
+
+    #target {
+        min-height: 200px;
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+
+        #target .component {
+            border: 1px solid #fff;
+        }
+
+    #temp {
+        width: 500px;
+        background: white;
+        border: 1px dotted #ccc;
+        border-radius: 10px;
+    }
+
+    .popover-content form {
+        margin: 0 auto;
+        width: 213px;
+    }
+
+        .popover-content form .btn {
+            margin-right: 10px;
+        }
+
+    #source {
+        min-height: 500px;
+    }
+</style>
+
+<form class="form-horizontal" method="post">
+    <fieldset>
+        <div name="legend" class="">
+            <legend class="">新文章：</legend>
+        </div>
+        <div class="control-group">
+            <!-- Select Basic -->
+            <label class="control-label">选择模版</label>
+            <div class="controls">
+                <select name="TempleteId" class="input-xlarge">
+                    <option selected value="1">基本</option>
+                    <option value="1">进阶</option>
+                    <option value="1">高级</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Prepended text-->
+            <label class="control-label">内部标题</label>
+            <div class="controls">
+                <div class="input-prepend">
+                    <input class="span2" placeholder="文章内部显示标题" name="Title" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Prepended text-->
+            <label class="control-label">外部标题</label>
+            <div class="controls">
+                <div class="input-prepend">
+                    <input class="span2" placeholder="外部显示标题" name="TitleDisp" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Textarea -->
+            <label class="control-label">外部脚本</label>
+            <div class="controls">
+                <div class="textarea">
+                    <textarea name="ExtScript" placeholder="外部脚本链接，可为空" type="" class=""> </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Prepended text-->
+            <label class="control-label">TAG</label>
+            <div class="controls">
+                <div class="input-prepend">
+                    <input class="span2" placeholder="标签" name="Tag" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Textarea -->
+            <label class="control-label">文章内容</label>
+            <div class="controls">
+                <div class="textarea">
+                    <textarea name="Content" placeholder="文章正文" type="" class=""> </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">插入音乐</label>
+            <div class="controls">
+                <!-- Multiple Radios -->
+                <label class="checkbox">
+                    <input type="checkbox" name="HasMusic" value="1">
+                    是
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" checked="checked" name="HasMusic" value="0">
+                    否
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Textarea -->
+            <label class="control-label">音乐列表</label>
+            <div class="controls">
+                <div class="textarea">
+                    <textarea name="MusicList" placeholder="音乐列表字符串" type="" class=""> </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">是否发布</label>
+            <div class="controls">
+                <!-- Multiple Checkboxes -->
+                <label class="checkbox">
+                    <input type="checkbox" checked="checked" name="IsPublish" value="1">
+                    是
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="IsPublish" value="0">
+                    否
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Prepended text-->
+            <label class="control-label">内部题头图</label>
+            <div class="controls">
+                <div class="input-prepend">
+                    <input class="span2" placeholder="填入图片地址" name="TitleImg" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Prepended text-->
+            <label class="control-label">外部预览图</label>
+            <div class="controls">
+                <div class="input-prepend">
+                    <input class="span2" placeholder="填入图片地址" name="TitleImgDisp" type="text">
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-success">保存</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
 
 
 @section Scripts {
