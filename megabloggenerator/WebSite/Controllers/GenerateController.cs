@@ -22,6 +22,35 @@ namespace WebSite.Controllers
             }
             return View(preview);
         }
+        public ActionResult PageIndex() 
+        {
+            PageIndex pageindex = new PageIndex();
+            List<POST> PostList = null;
+            using (var ctx = new WebSite.Models.MegaGenerateEntities())
+            {
+                PostList = ctx.POST.ToList();
+            }
+            pageindex.postList = PostList;
+            return View(pageindex);
+        }
+        
+        [HttpGet]
+        public JsonResult UpdateIndex() 
+        {
+            PageIndex pageindex = new PageIndex();
+            List<POST> PostList = null;
+            using (var ctx = new WebSite.Models.MegaGenerateEntities())
+            {
+                PostList = ctx.POST.ToList();
+            }
+            pageindex.postList = PostList;
+            CommonHelper helper = new CommonHelper();
+            string storagePath = Server.MapPath("/") + "\\blog\\";
+            string fileName = index + ".html";
+            string pageName = "PageIndex";
+            helper.GeneratePage(storagePath, fileName, pageName, pageindex, ControllerContext);
+            return Json("(=ﾟωﾟ)=", JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public JsonResult GenerateAll()
@@ -43,7 +72,7 @@ namespace WebSite.Controllers
                     helper.GeneratePage(storagePath, fileName, pageName, preview, ControllerContext);
                 }
             }
-            return Json("true", JsonRequestBehavior.AllowGet);
+            return Json("|∀ﾟ", JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public JsonResult Generate(int id)
@@ -60,8 +89,8 @@ namespace WebSite.Controllers
             string storagePath = Server.MapPath("/") + "\\blog\\" + createDT.Year + "\\" + createDT.Month + "\\";
             string fileName = preview.post.Id + ".html";
             string pageName = "Details";
-            var result = helper.GeneratePage(storagePath, fileName, pageName, preview,ControllerContext);
-            return Json(result,JsonRequestBehavior.AllowGet);
+            helper.GeneratePage(storagePath, fileName, pageName, preview,ControllerContext);
+            return Json("(＾o＾)ﾉ", JsonRequestBehavior.AllowGet);
         }
 
     }
