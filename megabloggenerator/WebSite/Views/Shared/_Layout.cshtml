@@ -18,13 +18,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("MEGATON Blog生成器！", "Index", "Post", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("MEGATECH 生成器！", "Index", "Post", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("模版", "List", "Templete", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("稿件", "List", "Post", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("预览", "Details", "Preview", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("模版列表", "List", "Templete", new { area = "" }, null)</li>
+                    <li><a href="127.0.0.1:83">模版生成器</a></li>
+                    <li>@Html.ActionLink("稿件列表", "List", "Post", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("预览布局", "Details", "Preview", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("生成全部", "GenerateAll", "Generate", new { area = "" }, null)</li>
                 </ul>
             </div>

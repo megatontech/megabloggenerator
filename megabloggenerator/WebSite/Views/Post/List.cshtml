@@ -47,13 +47,16 @@
 
         function operateFormatter(value, row, index) {
             return [
-                '<a class="view" href="javascript:void(0)" title="view">',
-                '<i class="glyphicon glyphicon-eye"></i>',
-                '</a>',
-                '<a class="edit" href="javascript:void(0)" title="edit">',
+                '<a class="view" href="javascript:void(0)" title="预览">',
+                '<i class="glyphicon glyphicon-eye-open"></i>',
+                '</a>&nbsp;',
+                '<a class="download" href="javascript:void(0)" title="生成">',
+                '<i class="glyphicon glyphicon-download-alt"></i>',
+                '</a>&nbsp;',
+                '<a class="edit" href="javascript:void(0)" title="编辑">',
                 '<i class="glyphicon glyphicon-edit"></i>',
-                '</a>  ',
-                '<a class="delete" href="javascript:void(0)" title="delete">',
+                '</a>&nbsp;',
+                '<a class="delete" href="javascript:void(0)" title="删除">',
                 '<i class="glyphicon glyphicon-remove"></i>',
                 '</a>'
             ].join('');
@@ -63,6 +66,11 @@
             'click .view': function (e, value, row, index) {
                 var delid = row.Id;
                 window.location.href = "view?id=" + delid;
+                window.open(window.location.host + "/Preview/Details?id=" + delid);
+            },
+            'click .download': function (e, value, row, index) {
+                var delid = row.Id;
+                window.open(window.location.host + "/Generate/Generate?id=" + delid);
             },
             'click .edit': function (e, value, row, index) {
                 var delid = row.Id;
@@ -70,8 +78,8 @@
             },
             'click .delete': function (e, value, row, index) {
                 var delid = row.Id;
-                if (confirm("goona del this?")) {
-                    $.ajax({ type: "GET", url: "delete", data: 'id=' + delid, datatype: "json", success: function (msg) { alert("del " + msg + "!"); } });
+                if (confirm("你TM是认真的?")) {
+                    $.ajax({ type: "GET", url: "delete", data: 'id=' + delid, datatype: "json", success: function (msg) { alert("没啦 " + msg + "!"); } });
                     $table.bootstrapTable('remove', {
                         field: 'id',
                         values: [row.id]
