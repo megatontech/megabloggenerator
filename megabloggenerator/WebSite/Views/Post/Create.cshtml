@@ -1,5 +1,4 @@
-﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
+﻿<link href="~/Content/bootstraps/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" />
 <style>
     body {
@@ -122,6 +121,7 @@
             <!-- Textarea -->
             <label class="control-label">音乐列表</label>
             <div class="controls">
+                <input id="fileupload" type="file" name="files[]" data-url="post/UploadFile" multiple>
                 <div class="textarea">
                     <textarea name="MusicList" placeholder="音乐列表字符串" type="" class=""> </textarea>
                 </div>
@@ -167,9 +167,5 @@
         </div>
 
     </fieldset>
+    
 </form>
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
