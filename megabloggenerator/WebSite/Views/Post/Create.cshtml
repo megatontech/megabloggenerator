@@ -1,5 +1,8 @@
-﻿<link href="~/Content/bootstraps/bootstrap.min.css" rel="stylesheet" />
+﻿
+<link href="~/js/uploadfile/uploadfile.css" rel="stylesheet" />
+<link href="~/Content/bootstraps/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" />
+
 <style>
     body {
         padding-top: 60px;
@@ -120,6 +123,7 @@
         <div class="control-group">
             <!-- Textarea -->
             <label class="control-label">音乐列表</label>
+            <div id="fileuploader">Upload</div>
             <div class="controls">
                 <input id="fileupload" type="file" name="files[]" data-url="post/UploadFile" multiple>
                 <div class="textarea">
@@ -167,5 +171,18 @@
         </div>
 
     </fieldset>
-    
 </form>
+<script src="~/js/uploadfile/jquery.uploadfile.min.js"></script>
+<script>
+$(document).ready(function()
+{
+	$("#fileuploader").uploadFile({
+	    url: "post/UploadFile",
+	fileName:"music"
+	});
+});
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}s
