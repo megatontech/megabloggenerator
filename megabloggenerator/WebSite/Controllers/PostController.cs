@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using WebSite.Models;
 
@@ -186,7 +187,23 @@ namespace WebSite.Controllers
             PostList.ForEach(x=>x.TitleImgDisp=("<img style=' height: 30px;width: 40px;' src='../postImg/"+x.Id+"/"+x.TitleImgDisp+"' alt='title' />"));
             return Json(PostList,JsonRequestBehavior.AllowGet);
         }
-
+        [HttpPost]
+        public JsonResult UploadFile()
+        {
+            string msg = "";
+            foreach (string fileName in Request.Files)
+            {
+                HttpPostedFileBase filebase = Request.Files[fileName];
+                if (filebase.FileName.Length > 0 && filebase.ContentLength > 0)
+                {
+                    string filename = System.IO.Path.GetFileName(filebase.FileName);
+                    string serverPath = Server.MapPath(String.Format("~/UploadFile/{0}", filename));
+                    filebase.SaveAs(serverPath);
+                }
+                else { msg = "error"; }
+            }
+            return Json(msg);
+        }
         #endregion - 方法 -
     }
 }
