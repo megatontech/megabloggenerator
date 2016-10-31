@@ -113,3 +113,4 @@ C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\zh-Hans\System.Web.Web
 C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.csprojResolveAssemblyReference.cache
 C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.dll
 C:\Github\megabloggenerator\megabloggenerator\WebSite\obj\Debug\WebSite.pdb
+C:\Github\megabloggenerator\megabloggenerator\WebSite\bin\Newtonsoft.Json.pdb
