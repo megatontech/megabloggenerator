@@ -32,6 +32,7 @@ namespace WebSite.Controllers
         }
 
         // POST: Post/Create
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
