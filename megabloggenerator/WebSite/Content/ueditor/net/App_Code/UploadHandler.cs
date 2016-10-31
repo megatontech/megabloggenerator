@@ -64,6 +64,7 @@ public class UploadHandler : Handler
         Result.OriginFileName = uploadFileName;
 
         var savePath = PathFormatter.Format(uploadFileName, UploadConfig.PathFormat);
+        savePath = "/postImg/" + uploadFileName;
         var localPath = Server.MapPath(savePath);
         try
         {
