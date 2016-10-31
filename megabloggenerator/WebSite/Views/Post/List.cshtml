@@ -65,12 +65,12 @@
         window.operateEvents = {
             'click .view': function (e, value, row, index) {
                 var delid = row.Id;
-                window.location.href = "view?id=" + delid;
-                window.open(window.location.host + "/Preview/Details?id=" + delid);
+                window.location.href = "edit?id=" + delid;
+                window.location.href = window.location.host + "/Preview/Details?id=" + delid;
             },
-            'click .download': function (e, value, row, index) {
+            'click .down': function (e, value, row, index) {
                 var delid = row.Id;
-                window.open(window.location.host + "/Generate/Generate?id=" + delid);
+                window.location.href = window.location.host + "/Generate/Generate?id=" + delid;
             },
             'click .edit': function (e, value, row, index) {
                 var delid = row.Id;

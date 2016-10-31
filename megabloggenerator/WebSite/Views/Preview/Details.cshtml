@@ -104,7 +104,8 @@
                     <!-- .featured-image -->
                     <!-- .entry-content -->
                     <div class="entry-content">
-                        @Model.Content
+                        @{var contentStr = Model.Content.ToString();}
+                        @Html.Raw(contentStr)
                         <hr />
                         <!-- .related-posts -->
                     </div>
@@ -184,7 +185,7 @@
     <script src="/js/main.js"></script>
     <script src="/js/blog-post.js"></script>
     <script src="/js/lazyload.js"></script>
-    @Model.post.ExtScript
+    @Html.Raw(Model.post.ExtScript)
     <script>
         $("img").lazyload();
     </script>

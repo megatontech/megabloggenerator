@@ -104,7 +104,8 @@
                             <!-- .featured-image -->
                             <!-- .entry-content -->
                             <div class="entry-content">
-                                @Model.Content
+                                @{var contentStr = Model.Content.ToString();}
+                                @Html.Raw(contentStr)
                                 <hr />
                                 <!-- .related-posts -->
                             </div>
